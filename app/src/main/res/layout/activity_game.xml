@@ -15,17 +15,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+
             <Button
+                android:id="@+id/playagain"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
-                android:id="@+id/playagain"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:onClick="PLAYAGAIN"
                 android:background="@color/colorAccent"
-                android:visibility="invisible"
+                android:onClick="PlayAgain"
+                android:text="Play Again"
                 android:textColor="#ffff"
-                android:text="Play Again"/>
+                android:visibility="invisible" />
 
         </RelativeLayout>
 
@@ -251,26 +252,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/colorPrimary"
-            android:onClick="startgame"
+            android:onClick="StartGame"
             android:text="Start"
             android:textColor="#ffffff"
             android:visibility="visible" />
 
         <RelativeLayout
+            android:id="@+id/winnerbackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/winnerbackground"
             android:background="@color/colorPrimary"
             android:visibility="invisible">
 
             <TextView
+                android:id="@+id/winnertext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:text="Player 1 - WIN"
-                android:id="@+id/winnertext"
                 android:textAllCaps="true"
                 android:textColor="#ffff"
                 android:textSize="20sp"

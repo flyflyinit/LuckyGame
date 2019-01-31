@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lucky Game Logo"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/logo"
+            android:layout_centerVertical="true"
+            android:text="Lucky Game Logo"
             android:textSize="30sp"
-            android:soundEffectsEnabled="true"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,11 +26,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
             android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
-            android:background="@color/colorPrimary"
             android:layout_marginTop="30dp"
+            android:background="@color/colorPrimary"
+            android:onClick="start"
             android:text="START"
-            android:onClick="start"/>
+            android:textColor="#ffffff" />
 
     </RelativeLayout>
 

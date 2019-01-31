@@ -23,45 +23,49 @@ public class Game extends AppCompatActivity {
     }
 
 
-    ///// index of beginig //////////////
-    int BEGIN =0 ;
-    /////// lock players /////////
-    boolean LockPlayer1 =false , LockPlayer2 =false ,END=false;
+    ///// INDEX OF BEGINNING //////////////
+    int BEGIN = 0;
+
+    /////// THESE VARIABLES BELOW USED TO CONTROL PLAYERS , IF IT IS THE ROUND OF PLAYER1 THEN PLAYER2 SHOULD BE LOCKED /////////
+    boolean LockPlayer1 = false, LockPlayer2 = false, END = false;
 
 
-    /////// starting game , by choosing the first player randomly ////////////
-    public void startgame(View view){
+    /////// THIS IS THE START OF THE GAME , THE FIRST PLAYER GENERATED RANDOMLY ////////////
+    public void StartGame(View view) {
         Button three = (Button) findViewById(R.id.startbutton);
 
-        ////// set the button of start invisible ///////////
+        ////// MAKE THE BUTTON INVISIBLE ///////////
         three.setVisibility(View.INVISIBLE);
 
-        ////// choose a random player /////////
+        ////// CHOOSE RANDOM PLAYER /////////
         GenerateRandomPlayer();
-
     }
 
     ////// generate random player for the first play //////////
-    public void GenerateRandomPlayer(){
+    public void GenerateRandomPlayer() {
         Random r = new Random();
-        int player = r.nextInt(2)+1;
 
-        if (player == 1 ){
+        /// THIS INTEGER SHOULD BE 1 OR 2 /// THIS GENERATE 1 OR 2
+        int player = r.nextInt(2) + 1;
 
-            ////// allow player one to play ////////
+
+        if (player == 1) {
+            /// IF THE RANDOM NUMBER IS 1 ,MEANS THAT PLAYER1 SHOULD PLAY NOW --> AND LOCK PLAYER 2  ////////
             PlayerOnePlay();
-            LockPlayer2 = true ;
-        }else {
+            LockPlayer2 = true;
 
-            ///// alow player 2 to play /////////
+        } else {
+
+            /// IF THE RANDOM NUMBER IS 2 ,MEANS THAT PLAYER2 SHOULD PLAY NOW --> AND LOCK PLAYER 1  ////////
             PlayerTwoPlay();
-            LockPlayer1 = true ;
+            LockPlayer1 = true;
         }
     }
 
 
-    //////////// creating tableau with   " Buttons -> indexes "  each button has index , the first button has index 0
-    public void CreateTab(){
+    //////////// CREATING TABLE ,THIS TABLE CONTAINS EACH CUBS , AND EACH CUB HAS AN INDEX /// INDEXES START FROM 0 TO 24
+    public void CreateTab() {
+
         Button tabone = (Button) findViewById(R.id.one);
         Button tabtwo = (Button) findViewById(R.id.two);
         Button tabthree = (Button) findViewById(R.id.three);
@@ -88,10 +92,10 @@ public class Game extends AppCompatActivity {
         Button tabtwentyfour = (Button) findViewById(R.id.twentyfour);
         Button tabtwentyfive = (Button) findViewById(R.id.twentyfive);
 
-        ////// create  ARRAYlist
+        ////// CREATE ARRAY LIST WITH TYPE BUTTON //
         ArrayList<Button> tab = new ArrayList<Button>();
 
-        ////// add values IN THE ARRAYLIST/////////
+        ////// ADD EACH CUBS IN ARRAY LIST  /////
         tab.add(tabone);
         tab.add(tabtwo);
         tab.add(tabthree);
@@ -118,58 +122,87 @@ public class Game extends AppCompatActivity {
         tab.add(tabtwentyfour);
         tab.add(tabtwentyfive);
 
-        //////// change color of boxes , from 0 to the Begin
-        for (int i=0 ; i<= BEGIN-1 ; i ++){
-            Button test = tab.get(i) ;
-            test.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            if (test == tabtwentyfive){
-                END=true ;
+        //////// CHANGE CUBS' COLORS /// EACH TIME CHANGE FROM         INDEX -> 0    TO    INDEX -> BEGIN - 1
+        for (int i = 0 ; i <= BEGIN -1 ; i++) {
+            Button cub = tab.get(i);
+            cub.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+            //// STOP WHEN FIND THE LAST CUB // THIS MEAN THAT THE GAME IS OVER
+            if (cub == tabtwentyfive) {
+                /// BOOLEAN END = TRUE   WHEN THE GAME IS OVER (END)
+                END = true;
             }
         }
-        if (END){
-
+        if (END) {
+            /// END THE GAME
             EndGame();
         }
     }
-    public void RoundOne(View view)  {
+
+
+    //// THIS IS FOR PLAYER 1 ///
+    public void RoundOne(View view) {
+        //// GENERATE RANDOM NUMBER FROM THE LAST INDEX (BEGIN VARIABLE) TO 25 (THE NUMBERS OF CUBS)
         Random r = new Random();
-        int s = r.nextInt(26-BEGIN)+BEGIN ;
-        LockPlayer1 = true ;
-        LockPlayer2 = false ;
+        int s = r.nextInt(26 - BEGIN) + BEGIN;
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Generate Random : "+(s-BEGIN)+"" ,Toast.LENGTH_SHORT) ;
+        //// CHANGE BOOLEAN VARIABLE STATE
+        LockPlayer1 = true;
+        LockPlayer2 = false;
+
+        //// SHOW SMALL MESSAGE ON THE SCREEN (THE GENERATED RANDOM NUMBER)
+        Toast toast = Toast.makeText(getApplicationContext(), "Generate Random : " + (s - BEGIN) + "", Toast.LENGTH_SHORT);
         toast.show();
-        BEGIN = s ;
-        CreateTab();
-        Convert () ;
 
+        //// CHANGE INDEX (BEGIN VARIABLE)
+        BEGIN = s;
+
+        ///// SHOW ON THE SCREEN THE RESULT
+        CreateTab();
+
+        ///// NOW WE SHOULD CONVERT THE STATE OF BUTTONS VISIBILITY (PLAYER 1 WILL BE INVISIBLE   AND   PLAYER 2 WILL BE VISIBLE)
+        Convert();
     }
-    public void RoundTwo(View view){
+
+
+    //// THIS IS FOR PLAYER 2
+    public void RoundTwo(View view) {
+        //// GENERATE RANDOM NUMBER FROM THE LAST INDEX (BEGIN VARIABLE) TO 25 (THE NUMBERS OF CUBS)
         Random r = new Random();
-        int s = r.nextInt(26-BEGIN)+BEGIN ;
-        LockPlayer2 = true ;
-        LockPlayer1 = false ;
+        int s = r.nextInt(26 - BEGIN) + BEGIN;
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Generate Random : "+(s-BEGIN)+"" ,Toast.LENGTH_SHORT) ;
+        //// CHANGE BOOLEAN VARIABLE STATE
+        LockPlayer2 = true;
+        LockPlayer1 = false;
+
+        //// SHOW SMALL MESSAGE ON THE SCREEN (THE GENERATED RANDOM NUMBER)
+        Toast toast = Toast.makeText(getApplicationContext(), "Generate Random : " + (s - BEGIN) + "", Toast.LENGTH_SHORT);
         toast.show();
-        BEGIN = s ;
-        CreateTab();
-        Convert () ;
 
+        //// CHANGE INDEX (BEGIN VARIABLE)
+        BEGIN = s;
+
+        ///// SHOW ON THE SCREEN THE RESULT
+        CreateTab();
+
+        ///// NOW WE SHOULD CONVERT THE STATE OF BUTTONS VISIBILITY (PLAYER 2 WILL BE INVISIBLE   AND   PLAYER 1 WILL BE VISIBLE)
+        Convert();
     }
 
 
-    /////////// end game ////////
+    /////////// END THE GAME ////////
+    public void EndGame() {
 
-    public void EndGame(){
         RelativeLayout t = (RelativeLayout) findViewById(R.id.winnerbackground);
         TextView b = (TextView) findViewById(R.id.winnertext);
 
+        /// MAKE IT VISIBLE
         t.setVisibility(View.VISIBLE);
 
-        if (LockPlayer2){
+        //// SHOW THE WINNER NAME
+        if (LockPlayer2) {
             b.setText("Player 2 - WIN");
-        }else{
+        } else {
             b.setText("Player 1 - WIN");
         }
 
@@ -177,18 +210,23 @@ public class Game extends AppCompatActivity {
         Button two = (Button) findViewById(R.id.buttontwo);
         Button again = (Button) findViewById(R.id.playagain);
 
+        /// INVISIBLE THE PLAYER 1 AND 2 BUTTONS
         one.setVisibility(View.INVISIBLE);
         two.setVisibility(View.INVISIBLE);
+
+        /// VISIBLE THE AGAIN BUTTON
         again.setVisibility(View.VISIBLE);
 
-        LockPlayer2 = true ;
-        LockPlayer1 = true ;
-
-
+        /// LOCK BOTH PLAYERS
+        LockPlayer2 = true;
+        LockPlayer1 = true;
     }
 
-    ///////// set button player one visible and button player two invisible ////////////
-    public void PlayerOnePlay(){
+
+    ///// BASICALLY WHEN WE SAY THAT PLAYER 1 SHOULD PLAY NOW ,THIS MEAN THAT PLAYER 2 WILL BE LOCKED , AND PLAYER 2 LOCKED MEAN THAT WE ARE GOING TO CHANGE THE STATE OF THE PLAYERS BUTTON BY CHANGING THE VISIBILITY //////
+
+    //// MAKE BUTTON (PLAYER 1) VISIBLE AND BUTTON (PLAYER 2) INVISIBLE
+    public void PlayerOnePlay() {
         Button one = (Button) findViewById(R.id.buttonone);
         Button two = (Button) findViewById(R.id.buttontwo);
 
@@ -196,9 +234,8 @@ public class Game extends AppCompatActivity {
         two.setVisibility(View.INVISIBLE);
     }
 
-
-    ///////// set button player two visible and button player one invisible ////////////
-    public void PlayerTwoPlay(){
+    //// MAKE BUTTON (PLAYER 2) VISIBLE AND BUTTON (PLAYER 1) INVISIBLE
+    public void PlayerTwoPlay() {
         Button one = (Button) findViewById(R.id.buttonone);
         Button two = (Button) findViewById(R.id.buttontwo);
 
@@ -207,17 +244,17 @@ public class Game extends AppCompatActivity {
     }
 
 
-    public void Convert (){
-        if ((LockPlayer1==true) & (LockPlayer2==false)){
+    public void Convert() {
+        if ((LockPlayer1 == true) & (LockPlayer2 == false)) {
             PlayerTwoPlay();
-        }else if ((LockPlayer2==true) & (LockPlayer1==false)) {
+        } else if ((LockPlayer2 == true) & (LockPlayer1 == false)) {
             PlayerOnePlay();
         }
     }
 
-    public void PLAYAGAIN(View view){
-        Intent l = new Intent(this,Game.class);
-        startActivity(l);
+    public void PlayAgain(View view) {
+        Intent GameIntent = new Intent(this, Game.class);
+        startActivity(GameIntent);
     }
 
 }

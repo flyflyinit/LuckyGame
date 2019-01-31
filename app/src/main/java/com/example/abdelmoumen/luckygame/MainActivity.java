@@ -13,33 +13,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-
-
-    ////// got to login page ////////////////////////////
+    ////// GOTO LOGIN ACTIVITY ////////////////////////////
     public void start (View view){
-        Intent i = new Intent(this,Login.class);
-        startActivity(i);
+        Intent LoginIntent = new Intent(this,Login.class);
+        startActivity(LoginIntent);
     }
 
-    /*
-    public void LOGINAGAIN(View view){
-        loginlogin();
-    }
-*/
-
-
-
-    /*
-    public void drici(View view){
-        Login l = new Login();
-        l.show();
-    }
-    */
 }
