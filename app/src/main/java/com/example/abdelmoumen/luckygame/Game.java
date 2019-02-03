@@ -1,12 +1,10 @@
 package com.example.abdelmoumen.luckygame;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +22,14 @@ public class Game extends AppCompatActivity {
 
 
     ///// INDEX OF BEGINNING //////////////
-    int BEGIN = 0;
+    private int BEGIN = 0;
 
     /////// THESE VARIABLES BELOW USED TO CONTROL PLAYERS , IF IT IS THE ROUND OF PLAYER1 THEN PLAYER2 SHOULD BE LOCKED /////////
-    boolean LockPlayer1 = false, LockPlayer2 = false, END = false;
+    private boolean LockPlayer1 = false, LockPlayer2 = false, END = false;
 
 
     /////// THIS IS THE START OF THE GAME , THE FIRST PLAYER GENERATED RANDOMLY ////////////
-    public void StartGame(View view) {
+     public void StartGame(View view) {
         Button three = (Button) findViewById(R.id.startbutton);
 
         ////// MAKE THE BUTTON INVISIBLE ///////////
@@ -42,11 +40,11 @@ public class Game extends AppCompatActivity {
     }
 
     ////// generate random player for the first play //////////
-    public void GenerateRandomPlayer() {
-        Random r = new Random();
+    private void GenerateRandomPlayer() {
+         Random r = new Random();
 
         /// THIS INTEGER SHOULD BE 1 OR 2 /// THIS GENERATE 1 OR 2
-        int player = r.nextInt(2) + 1;
+         int player = r.nextInt(2) + 1;
 
 
         if (player == 1) {
@@ -64,7 +62,7 @@ public class Game extends AppCompatActivity {
 
 
     //////////// CREATING TABLE ,THIS TABLE CONTAINS EACH CUBS , AND EACH CUB HAS AN INDEX /// INDEXES START FROM 0 TO 24
-    public void CreateTab() {
+    private void CreateTab() {
 
         Button tabone = (Button) findViewById(R.id.one);
         Button tabtwo = (Button) findViewById(R.id.two);
@@ -191,7 +189,7 @@ public class Game extends AppCompatActivity {
 
 
     /////////// END THE GAME ////////
-    public void EndGame() {
+    private void EndGame() {
 
         RelativeLayout t = (RelativeLayout) findViewById(R.id.winnerbackground);
         TextView b = (TextView) findViewById(R.id.winnertext);
@@ -226,7 +224,7 @@ public class Game extends AppCompatActivity {
     ///// BASICALLY WHEN WE SAY THAT PLAYER 1 SHOULD PLAY NOW ,THIS MEAN THAT PLAYER 2 WILL BE LOCKED , AND PLAYER 2 LOCKED MEAN THAT WE ARE GOING TO CHANGE THE STATE OF THE PLAYERS BUTTON BY CHANGING THE VISIBILITY //////
 
     //// MAKE BUTTON (PLAYER 1) VISIBLE AND BUTTON (PLAYER 2) INVISIBLE
-    public void PlayerOnePlay() {
+    private void PlayerOnePlay() {
         Button one = (Button) findViewById(R.id.buttonone);
         Button two = (Button) findViewById(R.id.buttontwo);
 
@@ -235,7 +233,7 @@ public class Game extends AppCompatActivity {
     }
 
     //// MAKE BUTTON (PLAYER 2) VISIBLE AND BUTTON (PLAYER 1) INVISIBLE
-    public void PlayerTwoPlay() {
+    private void PlayerTwoPlay() {
         Button one = (Button) findViewById(R.id.buttonone);
         Button two = (Button) findViewById(R.id.buttontwo);
 
@@ -244,7 +242,7 @@ public class Game extends AppCompatActivity {
     }
 
 
-    public void Convert() {
+    private void Convert() {
         if ((LockPlayer1 == true) & (LockPlayer2 == false)) {
             PlayerTwoPlay();
         } else if ((LockPlayer2 == true) & (LockPlayer1 == false)) {

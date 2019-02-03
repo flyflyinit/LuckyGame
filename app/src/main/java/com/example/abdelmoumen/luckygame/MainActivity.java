@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ////// GOTO LOGIN ACTIVITY ////////////////////////////
-    public void start (View view){
-        Intent LoginIntent = new Intent(this,Login.class);
+    public void start(View view) {
+        Intent LoginIntent = new Intent(this, Login.class);
         startActivity(LoginIntent);
     }
 
